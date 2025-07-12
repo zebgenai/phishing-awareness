@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,9 +8,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, Mail, Lock, User, AlertCircle, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Login = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -23,6 +25,17 @@ const Login = () => {
     confirmPassword: ""
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        navigate('/dashboard');
+      }
+    };
+    checkSession();
+  }, [navigate]);
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginForm({
@@ -104,16 +117,30 @@ const Login = () => {
     if (!validateLogin()) return;
 
     setIsLoading(true);
+    setErrors({});
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
+      if (error) {
+        setErrors({ general: error.message });
+        return;
+      }
+
       toast({
         title: "Login Successful",
         description: "Welcome back! Redirecting to dashboard...",
       });
-      // In a real app, you would redirect to dashboard here
-    }, 1000);
+      
+      navigate('/dashboard');
+    } catch (error) {
+      setErrors({ general: "An unexpected error occurred" });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -122,16 +149,44 @@ const Login = () => {
     if (!validateRegister()) return;
 
     setIsLoading(true);
+    setErrors({});
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const redirectUrl = `${window.location.origin}/`;
+      
+      const { data, error } = await supabase.auth.signUp({
+        email: registerForm.email,
+        password: registerForm.password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            name: registerForm.name,
+          }
+        }
+      });
+
+      if (error) {
+        setErrors({ general: error.message });
+        return;
+      }
+
       toast({
         title: "Registration Successful",
-        description: "Account created successfully! Please log in.",
+        description: "Please check your email to verify your account.",
       });
-      // Switch to login tab
-    }, 1000);
+      
+      // Reset form
+      setRegisterForm({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
+    } catch (error) {
+      setErrors({ general: "An unexpected error occurred" });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -210,6 +265,13 @@ const Login = () => {
                       </p>
                     )}
                   </div>
+
+                  {errors.general && (
+                    <Alert className="mb-4">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>{errors.general}</AlertDescription>
+                    </Alert>
+                  )}
 
                   <Button 
                     type="submit" 
@@ -328,6 +390,13 @@ const Login = () => {
                     )}
                   </div>
 
+                  {errors.general && (
+                    <Alert className="mb-4">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>{errors.general}</AlertDescription>
+                    </Alert>
+                  )}
+
                   <Button 
                     type="submit" 
                     className="w-full" 
@@ -341,16 +410,6 @@ const Login = () => {
           </CardContent>
         </Card>
 
-        {/* Backend Notice */}
-        <Alert>
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            This is a demo interface. For full authentication functionality, 
-            <Link to="/" className="text-primary hover:underline ml-1">
-              backend integration with Supabase is required
-            </Link>.
-          </AlertDescription>
-        </Alert>
       </div>
     </div>
   );
