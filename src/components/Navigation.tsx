@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X, User, BookOpen, MessageSquare, Trophy } from "lucide-react";
+import { Shield, Menu, X, BookOpen, MessageSquare, Trophy } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,13 +47,6 @@ const Navigation = () => {
               );
             })}
             
-            <Link to="/login">
-              <Button variant="outline" size="sm">
-                <User className="h-4 w-4" />
-                Login
-              </Button>
-            </Link>
-            
             <Link to="/dashboard">
               <Button size="sm">Dashboard</Button>
             </Link>
@@ -92,12 +86,7 @@ const Navigation = () => {
                   </Link>
                 );
               })}
-              <div className="flex space-x-2 px-3 py-2">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" size="sm" className="w-full">
-                    Login
-                  </Button>
-                </Link>
+              <div className="px-3 py-2">
                 <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
                   <Button size="sm" className="w-full">Dashboard</Button>
                 </Link>
