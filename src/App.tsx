@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 import PhishingAwareness from "./pages/PhishingAwareness";
 import EmailCheck from "./pages/EmailCheck";
 import Quiz from "./pages/Quiz";
-import Dashboard from "./pages/Dashboard";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +27,7 @@ const App = () => (
             <Route path="/learn" element={<PhishingAwareness />} />
             <Route path="/email-check" element={<EmailCheck />} />
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

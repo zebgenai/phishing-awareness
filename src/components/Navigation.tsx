@@ -47,9 +47,6 @@ const Navigation = () => {
               );
             })}
             
-            <Link to="/dashboard">
-              <Button size="sm">Dashboard</Button>
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -86,11 +83,6 @@ const Navigation = () => {
                   </Link>
                 );
               })}
-              <div className="px-3 py-2">
-                <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                  <Button size="sm" className="w-full">Dashboard</Button>
-                </Link>
-              </div>
             </div>
           </div>
         )}

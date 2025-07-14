@@ -45,7 +45,8 @@ Unsubscribe | Privacy Policy | Contact Us`,
           "Sent from legitimate bank domain",
           "No urgent action required",
           "No suspicious links",
-          "Professional formatting"
+          "Professional formatting",
+          "Includes official contact information"
         ],
         negative: []
       }
@@ -113,7 +114,8 @@ Amazon.com, Inc.
           "Legitimate Amazon domain",
           "No requests for personal information",
           "Professional appearance",
-          "Company address included"
+          "Company address included",
+          "Clear call to action"
         ],
         negative: []
       }
@@ -152,6 +154,235 @@ PayPal Security Team`,
           "Threatening language about account suspension",
           "External verification link",
           "No official PayPal branding"
+        ]
+      }
+    },
+    {
+      id: 5,
+      type: "phishing",
+      subject: "You've Won $1,000,000 in the International Lottery!",
+      sender: "lottery@winnings-claim.org",
+      content: `Congratulations!!!
+
+You have been selected as the winner of $1,000,000 USD in the International Email Lottery Program!
+
+Your winning numbers are: 7-14-21-28-35-42
+Reference Number: INT/8302118308/02
+
+To claim your prize, you must:
+1. Reply with your full name, address, and phone number
+2. Pay the processing fee of $500 via Western Union
+3. Provide a copy of your passport or driver's license
+
+IMPORTANT: You have only 72 hours to claim your prize or it will be forfeited!
+
+Contact our claims agent immediately:
+Email: claims@lottery-winnings.biz
+Phone: +234-801-234-5678
+
+Congratulations again!
+International Lottery Commission`,
+      indicators: {
+        positive: [],
+        negative: [
+          "Too good to be true offer",
+          "Requests upfront payment",
+          "Urgent time limit",
+          "Requests personal documents",
+          "International phone number (+234 is Nigeria)",
+          "Suspicious email domains",
+          "No legitimate lottery contact information",
+          "Multiple spelling and grammar errors"
+        ]
+      }
+    },
+    {
+      id: 6,
+      type: "legitimate",
+      subject: "Password Reset Confirmation - Microsoft Account",
+      sender: "Microsoft account team <account-security-noreply@accountprotection.microsoft.com>",
+      content: `Hi Sarah,
+
+Your password for your Microsoft account sarah.johnson@email.com was successfully changed on December 14, 2024 at 2:30 PM PST.
+
+If this was you, you can safely ignore this email.
+
+If this wasn't you, your account may be compromised:
+• Sign in to your account and change your password immediately
+• Review your recent activity
+• Enable two-factor authentication
+
+Get help: aka.ms/accounthelp
+
+Thanks,
+The Microsoft account team
+
+Microsoft Corporation
+One Microsoft Way, Redmond, WA 98052`,
+      indicators: {
+        positive: [
+          "Official Microsoft domain",
+          "Specific account email mentioned",
+          "Detailed timestamp provided",
+          "Clear next steps if compromised",
+          "Official Microsoft help link",
+          "Company address included",
+          "No immediate action required"
+        ],
+        negative: []
+      }
+    },
+    {
+      id: 7,
+      type: "phishing",
+      subject: "Apple ID Locked - Immediate Action Required",
+      sender: "Apple Support <noreply@apple-security.com>",
+      content: `Dear Apple Customer,
+
+Your Apple ID has been locked due to suspicious sign-in attempts from an unknown device.
+
+Device Information:
+- Location: Russia, Moscow
+- IP Address: 192.168.1.1
+- Time: Today, 3:42 AM
+
+IMMEDIATE ACTION REQUIRED:
+Click here to unlock your Apple ID: http://apple-id-unlock.secure-verify.net
+
+You will need to provide:
+• Apple ID username and password
+• Credit card information on file
+• Answers to security questions
+
+WARNING: Failure to verify within 24 hours will result in permanent account deletion and loss of all purchased content.
+
+Do not delay - secure your account now!
+
+Apple ID Support Team
+Apple Inc.`,
+      indicators: {
+        positive: [],
+        negative: [
+          "Generic greeting",
+          "Suspicious sender domain (not apple.com)",
+          "Creates extreme urgency",
+          "Threats of permanent deletion",
+          "Requests multiple sensitive details",
+          "Suspicious verification URL",
+          "Fear-based language",
+          "Immediate action demanded"
+        ]
+      }
+    },
+    {
+      id: 8,
+      type: "phishing",
+      subject: "Netflix - Update Payment Method",
+      sender: "Netflix Billing <billing@netfIix.com>",
+      content: `Hello,
+
+We were unable to process your monthly payment for your Netflix subscription.
+
+Your account will be suspended in 2 days if payment is not updated.
+
+Update Payment Method: http://netflix-billing-update.com/account
+
+Please log in with your Netflix credentials and update your payment information to continue enjoying Netflix.
+
+This is an automated message. Please do not reply to this email.
+
+Netflix Customer Service`,
+      indicators: {
+        positive: [],
+        negative: [
+          "Suspicious domain (capital I instead of l in Netflix)",
+          "Generic greeting (no name)",
+          "Creates urgency with deadline",
+          "External payment update link",
+          "Requests login credentials",
+          "No Netflix branding or official footer",
+          "Automated message claim to avoid replies"
+        ]
+      }
+    },
+    {
+      id: 9,
+      type: "legitimate",
+      subject: "Your Amazon Order Has Shipped",
+      sender: "Amazon.com <ship-confirm@amazon.com>",
+      content: `Hello Jessica,
+
+Your order has shipped!
+
+Order #: 114-3456789-1234567
+Shipped on: December 14, 2024
+
+Items in this shipment:
+• Echo Dot (5th Gen) - Charcoal
+• Quantity: 1
+
+Shipping Details:
+Carrier: UPS
+Tracking number: 1Z999AA1234567890
+Estimated delivery: December 16, 2024
+
+Track your package: Go to Your Orders to track your package
+
+If you need to return an item, visit our Returns Center.
+
+Thanks for shopping with us!
+Amazon.com
+
+Amazon.com, Inc. | 410 Terry Ave. North, Seattle, WA 98109-5210`,
+      indicators: {
+        positive: [
+          "Personal greeting with customer name",
+          "Official Amazon domain and subdomain",
+          "Specific order number and details",
+          "Legitimate tracking information",
+          "Professional formatting",
+          "Official Amazon branding and address",
+          "No requests for personal information"
+        ],
+        negative: []
+      }
+    },
+    {
+      id: 10,
+      type: "phishing",
+      subject: "IRS Tax Refund Notification",
+      sender: "Internal Revenue Service <refund@irs-gov.net>",
+      content: `OFFICIAL NOTICE
+
+Dear Taxpayer,
+
+The Internal Revenue Service has processed your tax return and determined you are eligible for a refund of $2,847.
+
+To receive your refund via direct deposit, you must verify your information within 5 business days.
+
+CLICK HERE TO CLAIM REFUND: http://irs-refund-processing.com/claim
+
+Required Information:
+- Social Security Number
+- Bank Account Number and Routing Number
+- Driver's License Number
+- Previous Year's Tax Return (upload PDF)
+
+Failure to respond within 5 days will result in your refund being sent to the U.S. Treasury General Fund.
+
+Internal Revenue Service
+Department of Treasury`,
+      indicators: {
+        positive: [],
+        negative: [
+          "IRS doesn't initiate contact via email",
+          "Suspicious domain (.net instead of .gov)",
+          "Requests sensitive financial information",
+          "External claiming website",
+          "Creates urgency with deadline",
+          "Generic taxpayer greeting",
+          "Threat of losing refund",
+          "Asks for multiple forms of ID"
         ]
       }
     }
