@@ -186,7 +186,7 @@ const PhishingAwareness = () => {
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <Shield className="h-16 w-16 text-primary animate-pulse-security" />
@@ -199,7 +199,7 @@ const PhishingAwareness = () => {
           </p>
         </div>
 
-        {/* What is Phishing Section */}
+        
         <Card className="mb-12 shadow-card bg-gradient-card">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
@@ -217,7 +217,7 @@ const PhishingAwareness = () => {
           </CardContent>
         </Card>
 
-        {/* Types of Phishing */}
+        
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Types of Phishing Attacks
@@ -253,7 +253,7 @@ const PhishingAwareness = () => {
           </div>
         </div>
 
-        {/* Warning Signs */}
+        
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Warning Signs to Watch For
@@ -274,7 +274,7 @@ const PhishingAwareness = () => {
           </div>
         </div>
 
-        {/* Basic Protection Tips */}
+        
         <Card className="mb-12 shadow-card bg-success/5 border-success/20">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
@@ -294,7 +294,7 @@ const PhishingAwareness = () => {
           </CardContent>
         </Card>
 
-        {/* Advanced Protection Strategies */}
+        
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Advanced Protection Strategies
@@ -329,7 +329,7 @@ const PhishingAwareness = () => {
           </div>
         </div>
 
-        {/* Practical Exercises */}
+        
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Practical Learning Exercises
@@ -355,7 +355,7 @@ const PhishingAwareness = () => {
           </div>
         </div>
 
-        {/* Incident Response Guide */}
+        
         <Card className="mb-12 shadow-card bg-destructive/5 border-destructive/20">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
@@ -383,7 +383,7 @@ const PhishingAwareness = () => {
           </CardContent>
         </Card>
 
-        {/* Course Completion */}
+        
         <Card className="mb-12 shadow-card bg-gradient-card">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">
@@ -428,7 +428,7 @@ const PhishingAwareness = () => {
           </CardContent>
         </Card>
 
-        {/* Additional Resources */}
+        
         <Card className="mb-12 shadow-card">
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2">

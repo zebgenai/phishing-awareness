@@ -173,7 +173,7 @@ const Quiz = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {!showResults ? (
           <>
-            {/* Header */}
+            
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
                 <Trophy className="h-12 w-12 text-primary animate-pulse-security" />
@@ -186,7 +186,7 @@ const Quiz = () => {
               </p>
             </div>
 
-            {/* Progress */}
+            
             <div className="mb-8">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-muted-foreground">
@@ -199,7 +199,7 @@ const Quiz = () => {
               <Progress value={progress} className="h-2" />
             </div>
 
-            {/* Question Card */}
+            
             <Card className="shadow-elevated mb-8 animate-fade-in">
               <CardHeader>
                 <CardTitle className="text-xl">
@@ -234,7 +234,7 @@ const Quiz = () => {
               </CardContent>
             </Card>
 
-            {/* Navigation */}
+            
             <div className="flex justify-between">
               <Button
                 variant="outline"
@@ -265,9 +265,9 @@ const Quiz = () => {
             </div>
           </>
         ) : (
-          /* Results */
+          
           <div className="animate-fade-in">
-            {/* Results Header */}
+            
             <div className="text-center mb-8">
               <Trophy className="h-16 w-16 text-primary mx-auto mb-4" />
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
@@ -281,7 +281,7 @@ const Quiz = () => {
               </p>
             </div>
 
-            {/* Score Breakdown */}
+            
             <Card className="shadow-elevated mb-8">
               <CardHeader>
                 <CardTitle>Detailed Results</CardTitle>
@@ -325,7 +325,7 @@ const Quiz = () => {
               </CardContent>
             </Card>
 
-            {/* Actions */}
+            
             <div className="text-center space-y-4">
               <Button onClick={handleRestartQuiz} size="lg" variant="outline">
                 <RotateCcw className="h-5 w-5" />

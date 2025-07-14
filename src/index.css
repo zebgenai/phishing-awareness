@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Phishing Awareness Training App Design System
-Security-focused, educational design with trust-building colors and smooth interactions.
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
     --background: 210 40% 98%;
@@ -18,29 +13,24 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 213 31% 9%;
 
-    /* Security Blues - Primary brand colors */
     --primary: 213 94% 68%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 213 84% 35%;
     
-    /* Trust and Safety */
     --secondary: 210 40% 96%;
     --secondary-foreground: 213 31% 9%;
     
-    /* Subtle backgrounds */
     --muted: 210 40% 94%;
     --muted-foreground: 213 19% 46%;
 
     --accent: 213 94% 95%;
     --accent-foreground: 213 94% 18%;
 
-    /* Warning and danger states */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
     
-    /* Success states */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
 
@@ -50,35 +40,25 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Custom gradients for security theme */
     --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 84% 35%));
     --gradient-hero: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 84% 50%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
     --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 53%));
     
-    /* Shadows for depth */
     --shadow-card: 0 4px 6px -1px hsl(213 94% 68% / 0.1), 0 2px 4px -1px hsl(213 94% 68% / 0.06);
     --shadow-elevated: 0 10px 15px -3px hsl(213 94% 68% / 0.1), 0 4px 6px -2px hsl(213 94% 68% / 0.05);
     --shadow-floating: 0 25px 50px -12px hsl(213 94% 68% / 0.25);
     
-    /* Animation transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 

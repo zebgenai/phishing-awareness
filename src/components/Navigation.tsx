@@ -21,13 +21,13 @@ const Navigation = () => {
     <nav className="bg-card shadow-card border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          
           <Link to="/" className="flex items-center space-x-2 group">
             <Shield className="h-8 w-8 text-primary group-hover:animate-pulse-security" />
             <span className="text-xl font-bold text-foreground">PhishGuard</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -49,7 +49,7 @@ const Navigation = () => {
             
           </div>
 
-          {/* Mobile menu button */}
+          
           <div className="md:hidden">
             <Button
               variant="ghost"
@@ -61,7 +61,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        
         {isMenuOpen && (
           <div className="md:hidden animate-fade-in">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-card border-t">

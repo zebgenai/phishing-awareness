@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      
       <section className="bg-gradient-hero text-primary-foreground py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -65,7 +65,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Statistics Section */}
+      
       <section className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -81,7 +81,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -121,7 +121,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="py-20 bg-primary/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AlertTriangle className="h-16 w-16 text-warning mx-auto mb-6 animate-pulse" />

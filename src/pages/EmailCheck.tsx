@@ -402,7 +402,7 @@ Department of Treasury`,
   return (
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <Mail className="h-16 w-16 text-primary animate-pulse-security" />
@@ -416,7 +416,7 @@ Department of Treasury`,
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Email List */}
+          
           <div className="lg:col-span-1">
             <h2 className="text-2xl font-semibold text-foreground mb-6">Email Examples</h2>
             <div className="space-y-4">
@@ -455,11 +455,11 @@ Department of Treasury`,
             </div>
           </div>
 
-          {/* Email Content */}
+          
           <div className="lg:col-span-2">
             {selectedEmail ? (
               <div className="space-y-6">
-                {/* Email Display */}
+                
                 <Card className="shadow-card">
                   <CardHeader className="border-b bg-muted/30">
                     <div className="flex items-center justify-between">
@@ -503,7 +503,7 @@ Department of Treasury`,
                   </CardContent>
                 </Card>
 
-                {/* Analysis Button */}
+                
                 <div className="text-center">
                   <Button 
                     onClick={handleShowAnalysis}
@@ -515,7 +515,7 @@ Department of Treasury`,
                   </Button>
                 </div>
 
-                {/* Analysis */}
+                
                 {showAnalysis && currentEmail && (
                   <div className="animate-fade-in">
                     <Card className="shadow-card">
@@ -526,7 +526,7 @@ Department of Treasury`,
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-6">
-                        {/* Positive Indicators */}
+                        
                         {currentEmail.indicators.positive.length > 0 && (
                           <div>
                             <h3 className="font-semibold text-success mb-3 flex items-center gap-2">
@@ -544,7 +544,7 @@ Department of Treasury`,
                           </div>
                         )}
 
-                        {/* Negative Indicators */}
+                        
                         {currentEmail.indicators.negative.length > 0 && (
                           <div>
                             <h3 className="font-semibold text-destructive mb-3 flex items-center gap-2">
@@ -562,7 +562,7 @@ Department of Treasury`,
                           </div>
                         )}
 
-                        {/* Verdict */}
+                        
                         <div className={`p-4 rounded-lg border ${
                           currentEmail.type === 'legitimate' 
                             ? 'bg-success/10 border-success/20' 
