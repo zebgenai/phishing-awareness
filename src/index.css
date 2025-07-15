@@ -41,16 +41,22 @@
     --radius: 0.75rem;
 
     --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 84% 35%));
-    --gradient-hero: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 84% 50%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(213 94% 68%) 0%, hsl(213 84% 50%) 50%, hsl(213 74% 40%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
     --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 53%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 86% 28%));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(213 94% 68% / 0.3), transparent 70%);
+    --gradient-shimmer: linear-gradient(90deg, transparent, hsl(213 94% 68% / 0.2), transparent);
     
     --shadow-card: 0 4px 6px -1px hsl(213 94% 68% / 0.1), 0 2px 4px -1px hsl(213 94% 68% / 0.06);
     --shadow-elevated: 0 10px 15px -3px hsl(213 94% 68% / 0.1), 0 4px 6px -2px hsl(213 94% 68% / 0.05);
     --shadow-floating: 0 25px 50px -12px hsl(213 94% 68% / 0.25);
+    --shadow-glow: 0 0 30px hsl(213 94% 68% / 0.4);
+    --shadow-neon: 0 0 20px hsl(213 94% 68% / 0.6), 0 0 40px hsl(213 94% 68% / 0.4), 0 0 60px hsl(213 94% 68% / 0.2);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-elastic: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -108,5 +114,94 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .animate-pulse-security {
+    animation: pulse-security 2s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animate-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-shimmer);
+    animation: shimmer 2s infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-floating);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.02);
+  }
+  
+  .gradient-text {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes pulse-security {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsl(213 94% 68% / 0.4);
+  }
+  to {
+    box-shadow: 0 0 30px hsl(213 94% 68% / 0.8), 0 0 40px hsl(213 94% 68% / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }

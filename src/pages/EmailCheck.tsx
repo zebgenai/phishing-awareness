@@ -403,16 +403,22 @@ Department of Treasury`,
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <Mail className="h-16 w-16 text-primary animate-pulse-security" />
+        <div className="text-center mb-12 relative">
+          <div className="absolute inset-0 bg-gradient-glow blur-3xl"></div>
+          <div className="relative z-10">
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <Mail className="h-16 w-16 text-primary animate-pulse-security" />
+                <div className="absolute inset-0 h-16 w-16 bg-primary/20 rounded-full blur-xl animate-glow"></div>
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 animate-fade-in">
+              Real vs Fake <span className="gradient-text">Email Examples</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{animationDelay: "0.2s"}}>
+              Learn to identify phishing emails by examining real examples side by side with legitimate communications.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Real vs Fake Email Examples
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Learn to identify phishing emails by examining real examples side by side with legitimate communications.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -423,10 +429,10 @@ Department of Treasury`,
               {emailExamples.map((email) => (
                 <Card 
                   key={email.id}
-                  className={`cursor-pointer transition-all duration-300 ${
+                  className={`cursor-pointer transition-all duration-300 hover-lift group ${
                     selectedEmail === email.id 
-                      ? 'shadow-elevated border-primary' 
-                      : 'shadow-card hover:shadow-elevated'
+                      ? 'shadow-elevated border-primary bg-primary/5 animate-glow' 
+                      : 'shadow-card hover:shadow-elevated hover-glow'
                   }`}
                   onClick={() => handleEmailSelect(email.id)}
                 >
@@ -460,8 +466,8 @@ Department of Treasury`,
             {selectedEmail ? (
               <div className="space-y-6">
                 
-                <Card className="shadow-card">
-                  <CardHeader className="border-b bg-muted/30">
+                <Card className="shadow-elevated hover-glow bg-gradient-card border-0 animate-fade-in">
+                  <CardHeader className="border-b bg-muted/30 relative overflow-hidden">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Mail className="h-5 w-5 text-primary" />

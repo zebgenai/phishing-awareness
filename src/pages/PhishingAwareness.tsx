@@ -187,16 +187,22 @@ const PhishingAwareness = () => {
     <div className="min-h-screen bg-background py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <Shield className="h-16 w-16 text-primary animate-pulse-security" />
+        <div className="text-center mb-12 relative">
+          <div className="absolute inset-0 bg-gradient-glow blur-3xl animate-float"></div>
+          <div className="relative z-10">
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <Shield className="h-16 w-16 text-primary animate-pulse-security" />
+                <div className="absolute inset-0 h-16 w-16 bg-primary/20 rounded-full blur-xl animate-glow"></div>
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 animate-fade-in">
+              <span className="gradient-text">Phishing Awareness</span> Guide
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{animationDelay: "0.2s"}}>
+              Learn about different types of phishing attacks and how to protect yourself from cybercriminals.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Phishing Awareness Guide
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Learn about different types of phishing attacks and how to protect yourself from cybercriminals.
-          </p>
         </div>
 
         
@@ -226,7 +232,7 @@ const PhishingAwareness = () => {
             {phishingTypes.map((type, index) => {
               const Icon = type.icon;
               return (
-                <Card key={index} className="shadow-card hover:shadow-elevated transition-all duration-300 transform hover:scale-105">
+                <Card key={index} className="shadow-card hover:shadow-elevated hover-lift hover-glow bg-gradient-card border-0 group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3">
                       <Icon className={`h-6 w-6 ${type.color}`} />
@@ -262,9 +268,9 @@ const PhishingAwareness = () => {
             {warningSignsData.map((sign, index) => {
               const Icon = sign.icon;
               return (
-                <Card key={index} className="shadow-card text-center bg-warning/5 border-warning/20">
+                <Card key={index} className="shadow-card text-center bg-warning/5 border-warning/20 hover-lift group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
                   <CardContent className="p-6">
-                    <Icon className="h-12 w-12 text-warning mx-auto mb-4" />
+                    <Icon className="h-12 w-12 text-warning mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
                     <h3 className="font-semibold text-foreground mb-2">{sign.title}</h3>
                     <p className="text-sm text-muted-foreground">{sign.description}</p>
                   </CardContent>

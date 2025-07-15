@@ -174,16 +174,22 @@ const Quiz = () => {
         {!showResults ? (
           <>
             
-            <div className="text-center mb-8">
-              <div className="flex justify-center mb-4">
-                <Trophy className="h-12 w-12 text-primary animate-pulse-security" />
+            <div className="text-center mb-8 relative">
+              <div className="absolute inset-0 bg-gradient-glow blur-3xl"></div>
+              <div className="relative z-10">
+                <div className="flex justify-center mb-4">
+                  <div className="relative">
+                    <Trophy className="h-12 w-12 text-primary animate-pulse-security" />
+                    <div className="absolute inset-0 h-12 w-12 bg-primary/20 rounded-full blur-xl animate-glow"></div>
+                  </div>
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 animate-fade-in">
+                  <span className="gradient-text">Phishing Awareness</span> Quiz
+                </h1>
+                <p className="text-muted-foreground animate-fade-in" style={{animationDelay: "0.2s"}}>
+                  Test your knowledge of phishing attacks and security best practices
+                </p>
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Phishing Awareness Quiz
-              </h1>
-              <p className="text-muted-foreground">
-                Test your knowledge of phishing attacks and security best practices
-              </p>
             </div>
 
             
@@ -200,7 +206,7 @@ const Quiz = () => {
             </div>
 
             
-            <Card className="shadow-elevated mb-8 animate-fade-in">
+            <Card className="shadow-elevated mb-8 animate-fade-in hover-glow bg-gradient-card border-0">
               <CardHeader>
                 <CardTitle className="text-xl">
                   {questions[currentQuestion].question}
@@ -210,10 +216,10 @@ const Quiz = () => {
                 {questions[currentQuestion].options.map((option, index) => (
                   <div
                     key={index}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`p-4 border rounded-lg cursor-pointer transition-all duration-300 hover-lift group ${
                       selectedAnswers[currentQuestion] === index
-                        ? 'border-primary bg-primary/10'
-                        : 'border-border hover:border-primary/50 hover:bg-accent/50'
+                        ? 'border-primary bg-primary/10 shadow-glow'
+                        : 'border-border hover:border-primary/50 hover:bg-accent/50 hover:shadow-elevated'
                     }`}
                     onClick={() => handleAnswerSelect(index)}
                   >
@@ -268,21 +274,27 @@ const Quiz = () => {
           
           <div className="animate-fade-in">
             
-            <div className="text-center mb-8">
-              <Trophy className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Quiz Complete!
-              </h1>
-              <div className="text-6xl font-bold text-primary mb-2">
-                {score}/{questions.length}
+            <div className="text-center mb-8 relative">
+              <div className="absolute inset-0 bg-gradient-glow blur-3xl animate-float"></div>
+              <div className="relative z-10">
+                <div className="relative inline-flex mb-4">
+                  <Trophy className="h-16 w-16 text-primary animate-float" />
+                  <div className="absolute inset-0 h-16 w-16 bg-primary/20 rounded-full blur-xl animate-glow"></div>
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 animate-fade-in">
+                  Quiz Complete!
+                </h1>
+                <div className="text-6xl font-bold gradient-text mb-2 animate-scale-in">
+                  {score}/{questions.length}
+                </div>
+                <p className={`text-xl ${scoreMessage.color} font-semibold animate-fade-in`} style={{animationDelay: "0.3s"}}>
+                  {scoreMessage.message}
+                </p>
               </div>
-              <p className={`text-xl ${scoreMessage.color} font-semibold`}>
-                {scoreMessage.message}
-              </p>
             </div>
 
             
-            <Card className="shadow-elevated mb-8">
+            <Card className="shadow-elevated mb-8 bg-gradient-card border-0 hover-glow">
               <CardHeader>
                 <CardTitle>Detailed Results</CardTitle>
               </CardHeader>
