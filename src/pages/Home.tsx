@@ -229,11 +229,11 @@ const Home = () => {
           </div>
 
           {/* Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
-                <div key={index} className="text-center group animate-fade-in" style={{animationDelay: `${0.6 + index * 0.1}s`}}>
+                <div key={index} className="text-center group">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-success/10 rounded-full group-hover:bg-success/20 transition-colors duration-300">
                       <Icon className="h-6 w-6 text-success group-hover:scale-110 transition-transform duration-300" />
@@ -244,6 +244,121 @@ const Home = () => {
                 </div>
               );
             })}
+          </div>
+
+          {/* How It Works Section */}
+          <div className="text-center mb-16">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              How Our <span className="gradient-text">Training Works</span>
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+              A simple 3-step process to become phishing-aware in just 30 minutes
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="text-center group">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-white">1</span>
+                </div>
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-full max-w-xs">
+                  <div className="h-0.5 bg-gradient-to-r from-blue-500/50 to-transparent hidden md:block"></div>
+                </div>
+              </div>
+              <h4 className="text-xl font-semibold text-foreground mb-3">Learn the Basics</h4>
+              <p className="text-muted-foreground">
+                Understand common phishing tactics, red flags, and security best practices through interactive lessons.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-white">2</span>
+                </div>
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-full max-w-xs">
+                  <div className="h-0.5 bg-gradient-to-r from-green-500/50 to-orange-500/50 hidden md:block"></div>
+                </div>
+              </div>
+              <h4 className="text-xl font-semibold text-foreground mb-3">Practice Analysis</h4>
+              <p className="text-muted-foreground">
+                Analyze real phishing emails and learn to identify suspicious elements before they reach your inbox.
+              </p>
+            </div>
+
+            <div className="text-center group">
+              <div className="relative mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-white">3</span>
+                </div>
+              </div>
+              <h4 className="text-xl font-semibold text-foreground mb-3">Test & Certify</h4>
+              <p className="text-muted-foreground">
+                Complete our comprehensive quiz to earn your Phishing Awareness Certificate and prove your skills.
+              </p>
+            </div>
+          </div>
+
+          {/* What You'll Learn Section */}
+          <div className="bg-muted/20 rounded-2xl p-8 mb-16">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                What You'll <span className="gradient-text">Master</span>
+              </h3>
+              <p className="text-muted-foreground">
+                Comprehensive skills to protect yourself and your organization
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Email Authentication</h4>
+                    <p className="text-sm text-muted-foreground">Learn to verify sender authenticity and domain legitimacy</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">URL Analysis</h4>
+                    <p className="text-sm text-muted-foreground">Spot malicious links and suspicious redirects instantly</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Social Engineering Tactics</h4>
+                    <p className="text-sm text-muted-foreground">Recognize psychological manipulation techniques</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Incident Response</h4>
+                    <p className="text-sm text-muted-foreground">Know exactly what to do if you encounter a threat</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Mobile Security</h4>
+                    <p className="text-sm text-muted-foreground">Protect yourself on smartphones and tablets</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-success mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Best Practices</h4>
+                    <p className="text-sm text-muted-foreground">Daily habits to maintain strong security posture</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
