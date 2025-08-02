@@ -251,47 +251,47 @@ const Home = () => {
       {/* Enhanced CTA Section */}
       <section className="py-24 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow blur-3xl opacity-20"></div>
-        <div className="absolute top-10 left-10 w-32 h-32 bg-warning/20 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-primary/20 rounded-full blur-2xl animate-float" style={{animationDelay: "1s"}}></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-warning/20 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-primary/20 rounded-full blur-2xl"></div>
         
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in">
+          <div>
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <AlertTriangle className="h-20 w-20 text-warning animate-float" />
-                <div className="absolute inset-0 h-20 w-20 bg-warning/20 rounded-full blur-xl animate-glow"></div>
+                <AlertTriangle className="h-20 w-20 text-warning" />
+                <div className="absolute inset-0 h-20 w-20 bg-warning/20 rounded-full blur-xl"></div>
               </div>
             </div>
             
-            <Badge className="mb-6 px-4 py-2 bg-destructive/20 text-destructive border-destructive/30 animate-scale-in">
+            <Badge className="mb-6 px-4 py-2 bg-destructive/20 text-destructive border-destructive/30">
               ⚠️ Don't Wait Until It's Too Late
             </Badge>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 animate-fade-in" style={{animationDelay: "0.2s"}}>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Don't Be the Next <span className="gradient-text text-destructive">Victim</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in" style={{animationDelay: "0.4s"}}>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Start your phishing awareness training today and protect yourself from cyber threats. 
               <span className="font-semibold text-foreground"> Every minute counts.</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in" style={{animationDelay: "0.6s"}}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/learn">
-                <Button size="lg" className="px-8 py-4 text-lg hover:shadow-neon transition-all duration-500 group animate-shimmer">
-                  <Shield className="h-6 w-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                <Button size="lg" className="px-8 py-4 text-lg group">
+                  <Shield className="h-6 w-6 mr-2" />
                   Start Training Now
-                  <ArrowRight className="h-6 w-6 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="h-6 w-6 ml-2" />
                 </Button>
               </Link>
               <Link to="/email-check">
-                <Button variant="outline" size="lg" className="px-8 py-4 text-lg hover:shadow-elevated transition-all duration-300 group">
-                  <Eye className="h-6 w-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                <Button variant="outline" size="lg" className="px-8 py-4 text-lg group">
+                  <Eye className="h-6 w-6 mr-2" />
                   Test Your Skills
                 </Button>
               </Link>
             </div>
             
-            <p className="text-sm text-muted-foreground mt-6 animate-fade-in" style={{animationDelay: "0.8s"}}>
+            <p className="text-sm text-muted-foreground mt-6">
               🔒 Trusted by thousands • ⭐ 5-star rated • 🚀 Start immediately
             </p>
           </div>
