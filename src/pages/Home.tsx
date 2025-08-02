@@ -19,6 +19,7 @@ import {
   Globe,
   Star
 } from "lucide-react";
+import blueTeamBadge from "@/assets/blue-team-badge.png";
 
 const Home = () => {
   const features = [
@@ -373,8 +374,12 @@ const Home = () => {
           <div>
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <AlertTriangle className="h-20 w-20 text-warning" />
-                <div className="absolute inset-0 h-20 w-20 bg-warning/20 rounded-full blur-xl"></div>
+                <img 
+                  src="/lovable-uploads/1012e7ff-2094-467e-b771-08f0c74bbac6.png" 
+                  alt="Blue Team Cybersecurity Badge" 
+                  className="h-20 w-20 object-contain"
+                />
+                <div className="absolute inset-0 h-20 w-20 bg-blue-500/20 rounded-full blur-xl"></div>
               </div>
             </div>
             
