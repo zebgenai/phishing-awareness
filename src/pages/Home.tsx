@@ -202,25 +202,24 @@ const Home = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className={`hover-lift hover-glow bg-gradient-card border-0 shadow-elevated group relative overflow-hidden animate-fade-in ${feature.borderColor}`} style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className={`absolute inset-0 ${feature.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                <Card key={index} className={`bg-gradient-card border-0 shadow-elevated group relative overflow-hidden ${feature.borderColor}`}>
+                  <div className={`absolute inset-0 ${feature.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                   <CardContent className="p-8 text-center relative z-10">
                     <div className="flex justify-center mb-6">
-                      <div className={`relative p-4 ${feature.bgColor} rounded-2xl group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`relative p-4 ${feature.bgColor} rounded-2xl`}>
                         <Icon className={`h-8 w-8 ${feature.color}`} />
-                        <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
                       {feature.title}
                     </h3>
                     <p className="text-muted-foreground mb-6 leading-relaxed">
                       {feature.description}
                     </p>
                     <Link to={feature.link}>
-                      <Button className="w-full group-hover:shadow-glow transition-all duration-300 animate-shimmer">
+                      <Button className="w-full">
                         Get Started
-                        <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </Link>
                   </CardContent>
