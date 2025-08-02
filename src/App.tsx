@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import PhishingAwareness from "./pages/PhishingAwareness";
 import EmailCheck from "./pages/EmailCheck";
+import LinkVerification from "./pages/LinkVerification";
 import Quiz from "./pages/Quiz";
 
 import NotFound from "./pages/NotFound";
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/learn" element={<PhishingAwareness />} />
             <Route path="/email-check" element={<EmailCheck />} />
+            <Route path="/link-verify" element={<LinkVerification />} />
             <Route path="/quiz" element={<Quiz />} />
             
             <Route path="*" element={<NotFound />} />

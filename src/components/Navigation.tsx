@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X, BookOpen, MessageSquare, Trophy } from "lucide-react";
+import { Shield, Menu, X, BookOpen, MessageSquare, Trophy, Search } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +12,7 @@ const Navigation = () => {
     { name: "Home", path: "/", icon: Shield },
     { name: "Learn", path: "/learn", icon: BookOpen },
     { name: "Email Check", path: "/email-check", icon: MessageSquare },
+    { name: "Link Verify", path: "/link-verify", icon: Search },
     { name: "Quiz", path: "/quiz", icon: Trophy },
   ];
 
