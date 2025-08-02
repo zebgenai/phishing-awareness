@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# Smart Security - Phishing Awareness Training
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/ece6a8e3-8051-481e-afee-8cd11790940a
+A comprehensive phishing awareness training platform to help users identify and protect against phishing attacks.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/ece6a8e3-8051-481e-afee-8cd11790940a) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -59,15 +53,17 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Supabase
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/ece6a8e3-8051-481e-afee-8cd11790940a) and click on Share -> Publish.
+You can deploy this project using various hosting platforms like Vercel, Netlify, or any static hosting service.
 
-## Can I connect a custom domain to my Lovable project?
+## Features
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Interactive phishing awareness training
+- Email analysis tools
+- Comprehensive quiz system
+- Real-world phishing examples
+- Progress tracking
+- Security best practices
