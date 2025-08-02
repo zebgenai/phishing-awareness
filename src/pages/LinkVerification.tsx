@@ -306,61 +306,6 @@ const LinkVerification = () => {
           </p>
         </div>
 
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Eye className="h-5 w-5" />
-              Analyze Your Own Link
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="url-input">Enter a URL to analyze:</Label>
-                <div className="flex gap-2 mt-2">
-                  <Input
-                    id="url-input"
-                    placeholder="https://example.com"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    className="flex-1"
-                    onKeyPress={(e) => e.key === 'Enter' && analyzeUserLink()}
-                  />
-                  <Button 
-                    onClick={() => copyToClipboard(userInput)} 
-                    variant="outline" 
-                    size="icon"
-                    disabled={!userInput}
-                  >
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button 
-                  onClick={analyzeUserLink} 
-                  disabled={!userInput.trim() || isAnalyzing}
-                  className="flex items-center gap-2"
-                >
-                  {isAnalyzing ? (
-                    <RefreshCw className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Search className="h-4 w-4" />
-                  )}
-                  {isAnalyzing ? "Analyzing..." : "Analyze Link"}
-                </Button>
-                <Button 
-                  onClick={clearAnalysis} 
-                  variant="outline"
-                  disabled={!userInput && !userAnalysis}
-                >
-                  Clear
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Link Examples */}
           <div>
