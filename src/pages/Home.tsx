@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 import { 
   Shield, 
   AlertTriangle, 
@@ -97,90 +98,187 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
-      <div className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{animationDelay: "1s"}}></div>
+      <motion.div 
+        className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-glow rounded-full blur-3xl opacity-30"></div>
       
       {/* Hero Section */}
-      <section className="relative z-10 bg-gradient-hero text-primary-foreground py-24 lg:py-32 overflow-hidden">
+      <section 
+        className="relative z-10 bg-gradient-hero text-primary-foreground py-24 lg:py-32 overflow-hidden"
+        aria-label="Main hero section with cybersecurity training introduction"
+      >
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="flex justify-center mb-8 animate-fade-in">
+            <motion.div 
+              className="flex justify-center mb-8"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               <div className="relative">
-                <Shield className="h-24 w-24 text-primary-foreground animate-pulse-security" />
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Shield className="h-24 w-24 text-primary-foreground" aria-hidden="true" />
+                </motion.div>
                 <div className="absolute inset-0 h-24 w-24 bg-primary-foreground/20 rounded-full blur-xl animate-glow"></div>
-                <Sparkles className="absolute -top-2 -right-2 h-8 w-8 text-warning animate-float" />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  className="absolute -top-2 -right-2"
+                >
+                  <Sparkles className="h-8 w-8 text-warning" aria-hidden="true" />
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
             
-            <Badge className="mb-6 px-4 py-2 bg-warning/20 text-warning border-warning/30 animate-scale-in">
-              🔒 Protect Yourself Today
-            </Badge>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <Badge className="mb-6 px-4 py-2 bg-warning/20 text-warning border-warning/30">
+                🔒 Protect Yourself Today
+              </Badge>
+            </motion.div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in" style={{animationDelay: "0.2s"}}>
+            <motion.h1 
+              className="text-5xl md:text-7xl font-bold mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
               Stay Safe from
               <span className="block gradient-text text-warning"> Phishing Attacks</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-primary-foreground/90 animate-fade-in" style={{animationDelay: "0.4s"}}>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-primary-foreground/90"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
               Master the art of identifying and protecting yourself from phishing scams through 
               <span className="font-semibold text-warning"> interactive training</span> and real-world examples.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in" style={{animationDelay: "0.6s"}}>
-              <Link to="/learn">
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto hover:shadow-glow transition-all duration-300 group">
-                  <BookOpen className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+            >
+              <Link to="/learn" aria-label="Start learning about phishing protection">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="w-full sm:w-auto interactive-button hover:shadow-glow group focus-visible-ring"
+                >
+                  <BookOpen className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                   Start Learning
-                  <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 </Button>
               </Link>
-              <Link to="/quiz">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-white/10 border-white/20 text-white hover:bg-white/20 hover:shadow-neon transition-all duration-300 group">
-                  <Trophy className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+              <Link to="/quiz" aria-label="Take the phishing awareness quiz">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-white/10 border-white/20 text-white hover:bg-white/20 hover:shadow-neon interactive-button group focus-visible-ring"
+                >
+                  <Trophy className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                   Take Quiz
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Enhanced Stats Section */}
-      <section className="py-20 bg-muted/20 relative">
+      <section 
+        className="py-20 bg-muted/20 relative"
+        aria-label="Phishing threat statistics"
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               The <span className="gradient-text">Phishing Threat</span> is Real
             </h2>
-            <p className="text-xl text-muted-foreground animate-fade-in" style={{animationDelay: "0.2s"}}>
+            <p className="text-xl text-muted-foreground">
               Understanding the scale helps you stay protected
             </p>
-          </div>
+          </motion.div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <Card key={index} className="text-center hover-lift hover-glow bg-gradient-card border-0 shadow-elevated group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
-                  <CardContent className="p-8">
-                    <div className="flex justify-center mb-4">
-                      <div className="relative">
-                        <Icon className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" />
-                        <div className="absolute inset-0 h-12 w-12 bg-primary/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <Card className="text-center interactive-card bg-gradient-card border-0 shadow-elevated group h-full">
+                    <CardContent className="p-8">
+                      <div className="flex justify-center mb-4">
+                        <div className="relative">
+                          <Icon 
+                            className="h-12 w-12 text-primary group-hover:scale-110 transition-transform duration-300" 
+                            aria-hidden="true"
+                          />
+                          <div className="absolute inset-0 h-12 w-12 bg-primary/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-4xl md:text-5xl font-bold gradient-text mb-2 group-hover:scale-105 transition-transform duration-300">
-                      {stat.number}
-                    </div>
-                    <p className="text-muted-foreground text-lg mb-2">{stat.label}</p>
-                    <Badge variant="outline" className="text-xs">
-                      {stat.trend}
-                    </Badge>
-                  </CardContent>
-                </Card>
+                      <div 
+                        className="text-4xl md:text-5xl font-bold gradient-text mb-2 group-hover:scale-105 transition-transform duration-300"
+                        aria-label={`${stat.number} - ${stat.label}`}
+                      >
+                        {stat.number}
+                      </div>
+                      <p className="text-muted-foreground text-lg mb-2">{stat.label}</p>
+                      <Badge variant="outline" className="text-xs">
+                        {stat.trend}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
           </div>
@@ -417,7 +515,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 
