@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import PhishingAwareness from "./pages/PhishingAwareness";
 import EmailCheck from "./pages/EmailCheck";
@@ -21,17 +22,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background flex flex-col">
           <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/learn" element={<PhishingAwareness />} />
-            <Route path="/email-check" element={<EmailCheck />} />
-            <Route path="/link-verify" element={<LinkVerification />} />
-            <Route path="/quiz" element={<Quiz />} />
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/learn" element={<PhishingAwareness />} />
+              <Route path="/email-check" element={<EmailCheck />} />
+              <Route path="/link-verify" element={<LinkVerification />} />
+              <Route path="/quiz" element={<Quiz />} />
+              
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
         </div>
       </BrowserRouter>
     </TooltipProvider>
