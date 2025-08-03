@@ -544,12 +544,11 @@ const LinkVerification = () => {
                 </CardContent>
               </Card>
             ) : !userAnalysis ? (
-              <Card>
+                <Card>
                 <CardContent className="p-8 text-center">
                   <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Analyze a Link</h3>
                   <p className="text-muted-foreground">
-                    Enter a URL above or select an example link to see a detailed security analysis.
+                    Select an example link above to see a detailed security analysis.
                   </p>
                 </CardContent>
               </Card>
