@@ -136,104 +136,187 @@ const LinkVerification = () => {
     let isLegitimate = true;
     let risk: "Low" | "Medium" | "High" = "Low";
 
-    // Protocol check
-    if (!url.startsWith('https://')) {
-      if (url.startsWith('http://')) {
+    try {
+      // Normalize URL
+      let normalizedUrl = url.trim();
+      if (!normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
+        normalizedUrl = `https://${normalizedUrl}`;
+      }
+
+      // Protocol check
+      if (!normalizedUrl.startsWith('https://')) {
         issues.push("Uses HTTP instead of HTTPS (not encrypted)");
         isLegitimate = false;
         risk = "High";
       } else {
-        issues.push("Missing protocol (http/https)");
-        risk = "Medium";
+        positives.push("Uses HTTPS encryption");
       }
-    } else {
-      positives.push("Uses HTTPS encryption");
-    }
 
-    // Domain analysis
-    const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`);
-    const domain = urlObj.hostname.toLowerCase();
+      const urlObj = new URL(normalizedUrl);
+      const domain = urlObj.hostname.toLowerCase();
 
-    // Common phishing patterns
-    const suspiciousChars = /[0-9]/.test(domain.replace(/\./g, ''));
-    if (suspiciousChars && (domain.includes('payp4l') || domain.includes('amaz0n') || domain.includes('g00gle'))) {
-      issues.push("Contains suspicious character substitutions (0 for o, 4 for a)");
-      isLegitimate = false;
-      risk = "High";
-    }
-
-    // Check for typosquatting
-    const knownDomains = ['google.com', 'facebook.com', 'amazon.com', 'paypal.com', 'microsoft.com', 'apple.com'];
-    const isDomainLegitimate = knownDomains.some(legitDomain => 
-      domain === legitDomain || domain.endsWith(`.${legitDomain}`)
-    );
-
-    if (isDomainLegitimate) {
-      positives.push("Matches known legitimate domain");
-    } else {
-      // Check for suspicious patterns
-      if (domain.includes('-') && knownDomains.some(legitDomain => 
-        domain.includes(legitDomain.split('.')[0]))) {
-        issues.push("Uses hyphens in domain that may mimic legitimate sites");
-        risk = risk === "Low" ? "Medium" : risk;
-      }
-    }
-
-    // URL path analysis
-    const path = urlObj.pathname.toLowerCase();
-    const suspiciousKeywords = ['urgent', 'suspend', 'verify', 'confirm', 'update', 'secure', 'alert'];
-    if (suspiciousKeywords.some(keyword => path.includes(keyword))) {
-      issues.push("Contains urgent or threatening keywords in path");
-      risk = risk === "Low" ? "Medium" : risk;
-      if (path.includes('suspend') || path.includes('urgent')) {
+      // IP address check (highest priority)
+      if (/^\d+\.\d+\.\d+\.\d+$/.test(domain)) {
+        issues.push("Uses IP address instead of domain name - highly suspicious");
         isLegitimate = false;
         risk = "High";
       }
+
+      // Suspicious domains patterns
+      const suspiciousDomains = [
+        'login-', 'secure-', 'verify-', 'account-', 'support-', 'help-',
+        'update-', 'confirm-', 'alert-', 'warning-', 'security-'
+      ];
+      
+      if (suspiciousDomains.some(pattern => domain.includes(pattern))) {
+        issues.push("Domain contains suspicious prefixes commonly used in phishing");
+        isLegitimate = false;
+        risk = "High";
+      }
+
+      // Character substitution patterns (typosquatting)
+      const brandSubstitutions = [
+        { original: 'google', patterns: ['g00gle', 'g0ogle', 'googIe', 'goog1e'] },
+        { original: 'paypal', patterns: ['payp4l', 'paypaI', 'p4ypal', 'paypaL'] },
+        { original: 'amazon', patterns: ['amaz0n', 'amazom', 'amazone', 'am4zon'] },
+        { original: 'microsoft', patterns: ['micr0soft', 'microsooft', 'microsofl'] },
+        { original: 'facebook', patterns: ['facebo0k', 'facebok', 'faceb00k'] },
+        { original: 'apple', patterns: ['appIe', 'app1e', 'appl3'] }
+      ];
+
+      brandSubstitutions.forEach(brand => {
+        brand.patterns.forEach(pattern => {
+          if (domain.includes(pattern)) {
+            issues.push(`Suspicious character substitution detected - '${pattern}' mimics '${brand.original}'`);
+            isLegitimate = false;
+            risk = "High";
+          }
+        });
+      });
+
+      // Known legitimate domains
+      const knownDomains = [
+        'google.com', 'facebook.com', 'amazon.com', 'paypal.com', 
+        'microsoft.com', 'apple.com', 'github.com', 'linkedin.com',
+        'twitter.com', 'instagram.com', 'youtube.com', 'gmail.com'
+      ];
+      
+      const isKnownLegit = knownDomains.some(legitDomain => 
+        domain === legitDomain || domain.endsWith(`.${legitDomain}`)
+      );
+
+      if (isKnownLegit) {
+        positives.push("Matches verified legitimate domain");
+      }
+
+      // Suspicious TLDs
+      const suspiciousTlds = ['.tk', '.ml', '.ga', '.cf', '.xyz', '.click', '.download'];
+      if (suspiciousTlds.some(tld => domain.endsWith(tld))) {
+        issues.push("Uses suspicious top-level domain commonly associated with malicious sites");
+        risk = risk === "Low" ? "Medium" : "High";
+      }
+
+      // URL shorteners (medium risk)
+      const shorteners = ['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'short.link'];
+      if (shorteners.some(shortener => domain.includes(shortener))) {
+        issues.push("URL shortener detected - destination is hidden");
+        risk = risk === "Low" ? "Medium" : risk;
+      }
+
+      // Excessive hyphens or dots
+      const hyphenCount = (domain.match(/-/g) || []).length;
+      const dotCount = (domain.match(/\./g) || []).length;
+      
+      if (hyphenCount > 2) {
+        issues.push("Excessive hyphens in domain - may be attempting to mimic legitimate sites");
+        risk = risk === "Low" ? "Medium" : risk;
+      }
+
+      if (dotCount > 3) {
+        issues.push("Excessive subdomains detected");
+        risk = risk === "Low" ? "Medium" : risk;
+      }
+
+      // URL path analysis
+      const path = urlObj.pathname.toLowerCase();
+      const suspiciousKeywords = [
+        'urgent', 'suspend', 'verify', 'confirm', 'update', 'secure', 
+        'alert', 'warning', 'blocked', 'limited', 'expired', 'locked'
+      ];
+      
+      const foundSuspiciousKeywords = suspiciousKeywords.filter(keyword => 
+        path.includes(keyword) || urlObj.search.includes(keyword)
+      );
+
+      if (foundSuspiciousKeywords.length > 0) {
+        issues.push(`Contains urgency-inducing keywords: ${foundSuspiciousKeywords.join(', ')}`);
+        if (foundSuspiciousKeywords.some(kw => ['suspend', 'urgent', 'blocked', 'expired'].includes(kw))) {
+          isLegitimate = false;
+          risk = "High";
+        } else {
+          risk = risk === "Low" ? "Medium" : risk;
+        }
+      }
+
+      // Domain length check
+      if (domain.length > 30) {
+        issues.push("Unusually long domain name");
+        risk = risk === "Low" ? "Medium" : risk;
+      }
+
+      // Check for common phishing patterns in full URL
+      const phishingPatterns = [
+        /login.*[0-9]/, /secure.*[0-9]/, /account.*verify/, 
+        /update.*payment/, /confirm.*identity/
+      ];
+      
+      if (phishingPatterns.some(pattern => normalizedUrl.match(pattern))) {
+        issues.push("URL structure matches common phishing patterns");
+        isLegitimate = false;
+        risk = "High";
+      }
+
+      // Final risk assessment
+      if (issues.length === 0) {
+        positives.push("No obvious red flags detected");
+        positives.push("URL structure appears normal");
+      }
+
+      // Adjust final legitimacy based on issues found
+      if (issues.some(issue => issue.includes('IP address') || issue.includes('character substitution') || issue.includes('phishing patterns'))) {
+        isLegitimate = false;
+        risk = "High";
+      } else if (issues.length > 2) {
+        isLegitimate = false;
+        risk = "High";
+      } else if (issues.length > 0) {
+        risk = "Medium";
+      }
+
+      const verdict = isLegitimate && risk === "Low" 
+        ? "✅ This link appears safe to visit" 
+        : risk === "Medium"
+        ? "⚠️ Exercise caution - this link has concerning features"
+        : "❌ This link appears malicious - do not visit";
+
+      return {
+        url: normalizedUrl,
+        isLegitimate: isLegitimate && risk === "Low",
+        risk,
+        issues,
+        positives,
+        verdict
+      };
+    } catch (error) {
+      return {
+        url,
+        isLegitimate: false,
+        risk: "High",
+        issues: ["Invalid URL format"],
+        positives: [],
+        verdict: "❌ Invalid URL - cannot analyze"
+      };
     }
-
-    // Length check
-    if (domain.length > 30) {
-      issues.push("Unusually long domain name");
-      risk = risk === "Low" ? "Medium" : risk;
-    }
-
-    // IP address check
-    if (/^\d+\.\d+\.\d+\.\d+/.test(domain)) {
-      issues.push("Uses IP address instead of domain name");
-      isLegitimate = false;
-      risk = "High";
-    }
-
-    // Subdomain analysis
-    const subdomains = domain.split('.');
-    if (subdomains.length > 3) {
-      issues.push("Has multiple subdomains which may be suspicious");
-      risk = risk === "Low" ? "Medium" : risk;
-    }
-
-    // Final determination
-    if (issues.length === 0) {
-      positives.push("No obvious red flags detected");
-    }
-
-    if (isLegitimate && issues.length <= 1) {
-      risk = "Low";
-    }
-
-    const verdict = isLegitimate && risk === "Low" 
-      ? "This link appears to be safe to visit" 
-      : risk === "Medium"
-      ? "Exercise caution - this link has some concerning features"
-      : "This link appears to be malicious - do not visit";
-
-    return {
-      url,
-      isLegitimate: isLegitimate && risk === "Low",
-      risk,
-      issues,
-      positives,
-      verdict
-    };
   };
 
   const analyzeUserLink = async () => {
@@ -305,6 +388,111 @@ const LinkVerification = () => {
             Learn to identify malicious links and verify authentic ones. Practice with real examples and understand the warning signs of phishing URLs.
           </p>
         </div>
+
+        {/* URL Analysis Input */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Search className="h-5 w-5" />
+              Link Verifier
+            </CardTitle>
+            <p className="text-muted-foreground">
+              Enter any URL to check if it looks suspicious or safe. Our analysis uses pattern matching to identify potential phishing attempts.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="url-input">URL to Analyze</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="url-input"
+                  placeholder="Enter URL (e.g., https://example.com)"
+                  value={userInput}
+                  onChange={(e) => {
+                    setUserInput(e.target.value);
+                    // Real-time analysis for immediate feedback
+                    if (e.target.value.trim() && e.target.value.includes('.')) {
+                      const result = analyzeUrl(e.target.value.trim());
+                      setUserAnalysis(result);
+                    } else {
+                      setUserAnalysis(null);
+                    }
+                  }}
+                  className="flex-1"
+                  aria-describedby="url-help"
+                />
+                <Button 
+                  onClick={analyzeUserLink} 
+                  disabled={isAnalyzing || !userInput.trim()}
+                  className="whitespace-nowrap"
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <Search className="h-4 w-4 mr-2" />
+                      Analyze
+                    </>
+                  )}
+                </Button>
+                {(userInput || userAnalysis) && (
+                  <Button onClick={clearAnalysis} variant="outline" size="icon">
+                    <RefreshCw className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+              <p id="url-help" className="text-sm text-muted-foreground">
+                Tip: Include the full URL with protocol (http:// or https://) for best results
+              </p>
+            </div>
+
+            {/* Example URLs */}
+            <div className="space-y-3">
+              <h4 className="font-medium">Quick Examples:</h4>
+              <div className="grid sm:grid-cols-2 gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setUserInput("https://accounts.google.com");
+                    const result = analyzeUrl("https://accounts.google.com");
+                    setUserAnalysis(result);
+                  }}
+                  className="justify-start h-auto p-3"
+                >
+                  <div className="text-left">
+                    <div className="flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3 text-success" />
+                      <span className="text-xs">Safe Example</span>
+                    </div>
+                    <code className="text-xs">accounts.google.com</code>
+                  </div>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setUserInput("http://login-g00gle.com");
+                    const result = analyzeUrl("http://login-g00gle.com");
+                    setUserAnalysis(result);
+                  }}
+                  className="justify-start h-auto p-3"
+                >
+                  <div className="text-left">
+                    <div className="flex items-center gap-1">
+                      <XCircle className="h-3 w-3 text-destructive" />
+                      <span className="text-xs">Suspicious Example</span>
+                    </div>
+                    <code className="text-xs">login-g00gle.com</code>
+                  </div>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Link Examples */}
