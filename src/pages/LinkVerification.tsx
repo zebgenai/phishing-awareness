@@ -385,7 +385,7 @@ const LinkVerification = () => {
             Link Verification Center
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Learn to identify malicious links and verify authentic ones. Practice with real examples and understand the warning signs of phishing URLs.
+            Learn to identify malicious links and verify authentic ones.
           </p>
         </div>
 
