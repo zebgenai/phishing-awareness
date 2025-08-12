@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Menu, X, BookOpen, MessageSquare, Trophy, Search } from "lucide-react";
+import { Shield, Menu, X, BookOpen, MessageSquare, Trophy, Search, Joystick } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +15,7 @@ const Navigation = () => {
     { name: "Email Check", path: "/email-check", icon: MessageSquare },
     { name: "Link Verify", path: "/link-verify", icon: Search },
     { name: "Quiz", path: "/quiz", icon: Trophy },
+    { name: "Game", path: "/game", icon: Joystick },
   ];
 
   const isActive = (path: string) => location.pathname === path;
